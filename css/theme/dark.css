@@ -1,0 +1,405 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('./font/fontello.eot?78273339');
+  src: url('./font/fontello.eot?78273339#iefix') format('embedded-opentype'),
+       url('./font/fontello.woff?78273339') format('woff'),
+       url('./font/fontello.ttf?78273339') format('truetype'),
+       url('./font/fontello.svg?78273339#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+   font-family: 'Exo', sans-serif;
+    font-size: 13px;
+   margin: 0;
+   background: #212529;
+}
+
+.loader-wrapper{
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.icon
+{
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+iframe  {
+  float:left;
+  height:22px;
+  width:100%;
+}
+.main{
+  max-width: 320px;
+  height: 100%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  min-height:300px;
+}
+
+.brand{
+  color:#ffffff;
+  padding-bottom:3px;
+  margin-bottom:10px;
+  font-size:33px;
+  border-bottom: solid 3px ;
+  border-image-source: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66));
+  border-image-slice: 1;
+}
+.container{
+  background: #3a4149;
+  color: #ffffff;
+  max-width: 310px;
+  height: 70%;
+  border-radius:10px;
+  border: 1px solid #ffffff !important;
+  padding: 10px;
+  margin-left:auto;
+  margin-right:auto;
+  transition: 0.3s;
+  text-align:center;
+  min-height:150px;
+  animation: fadein 1s;
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+  -o-animation: fadein 1s; /* Opera */
+  box-shadow: 0 0 5px 5px white;
+  /* box-shadow: 0 0 5px 5px white; */
+}
+.box{
+  margin-bottom:10px;
+  text-align:center;
+}
+.trialText{
+  margin-top: 5px;
+  margin-bottom:10px;
+  text-align:center;
+}
+
+.username {
+  background: #3a4149;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  text-align:center;
+  font-weight:bold;
+  font-family: serif;
+  font-size: 18px;
+  color: #ffffff;
+  outline: none;
+  width: 90%;
+  height: 35px;
+}
+
+.password {
+  background: #3a4149;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  text-align:center;
+  font-weight:bold;
+  font-family: serif;
+  font-size: 18px;
+  color: #ffffff;
+  outline: none;
+  width: 90%;
+  height: 35px;
+  margin-top: 3px;
+}
+
+.button {
+   background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #000000, #434343); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #000000, #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1px solid #ffffff;
+  border-radius:15px;
+  color: #fff;
+  font-weight: bold;
+  font-family: "serif";
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 80%;
+  height: 35px;
+  animation:tiltText 4s infinite;
+}
+.button:hover{
+  box-shadow: 0 0 15px #77f7f7;
+  color: firebrick;
+}
+
+.button2 {
+   background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #000000, #434343); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #000000, #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1px solid #ffffff;
+  border-radius:15px;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: "serif";
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 80%;
+  height: 35px;
+}
+.button2:hover{
+  font-weight:bold;
+}
+
+
+.small-button {
+   background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #000000, #434343); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #000000, #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1px solid #ffffff;
+  border-radius:15px;
+  margin-top: 1px;
+  color: #fff;
+  font-weight: bold;
+  font-family: "serif";
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  height: 30px;
+  /*width : 32%;*/
+  width : 49%;
+}
+
+.small-button:hover{
+  box-shadow: 0 0 15px #77f7f7;
+  color: firebrick;
+}
+
+
+
+
+.days,
+.hours,
+.minutes,
+.seconds {
+  display: inline-block;
+  width: 65px;
+  font-family: serif;
+  font-weight: bolder;
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+
+
+
+}
+
+.days {
+  background: lightblue;
+  width: 65px;
+  height: 75px;
+
+}
+
+.hours {
+   background: lightblue;
+  width: 65px;
+  height: 75px;
+}
+
+.minutes {
+   background: lightblue;
+  width: 65px;
+  height: 75px;
+}
+
+.seconds {
+   background: lightblue;
+  width: 65px;
+  height: 75px;
+}
+
+
+.numbers {
+  font-family: serif;
+  width: 45px;
+  background: #3a4149;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+ .secs {
+  display: inline-block;
+  width: 100%;
+  font-family: serif;
+  font-weight: bold;
+  padding: 10px;
+  color: black;
+  border-radius: 5px;
+}
+
+.secs {
+  background: #212529;}
+
+
+.num {
+  font-family: serif;
+  width: 100%;
+  background: #3a4149;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+.prettyline
+         {
+         height:5px;
+         border-top:0;
+         background:#c4e17f;
+         border-radius:5px;
+         background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+         }
+
+.table {
+  width: 100%;
+  border-collapse: collapse !important;
+}
+.table td,
+.table th {
+  padding: 5px;
+  border: 1px solid #ffffff !important;
+  /*box-shadow: 0 0 5px #a1f3f7;*/
+}
+
+.table td, th, a{
+  text-decoration: none;
+  color: white;
+}
+
+.table2 {
+  width: 100%;
+  border-collapse: collapse !important;
+  text-align:left;
+}
+.table2 td,
+.table2 th {
+  padding: 5px;
+  border: 1px solid #ffffff !important;
+  /*box-shadow: 0 0 5px #a1f3f7;*/
+}
+
+.table2 td, th, a{
+  text-decoration: none;
+}
+
+.table3 {
+  width: 100%;
+  border-collapse: collapse !important;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.table3 td,
+.table3 th {
+  padding: 5px;
+  border: 1px solid #ffffff !important;
+  /*box-shadow: 0 0 5px #a1f3f7;*/
+  column-width: 60% 60% 60%;
+}
+
+.table3 td, th, a{
+  text-decoration: none;
+}
+
+@keyframes tiltText {
+0%{
+  }
+63%{
+  width: 80%;
+  font-size: 16px;
+  }
+68%{
+  width: 70%;
+  font-size: 15px;
+  }
+70%{
+  -webkit-transform: rotate(0deg);
+  width: 95%;
+  font-size: 19px;
+  -webkit-animation-timing-function: ease-in-out;
+              animation-timing-function: ease-in-out;
+  }
+75%{
+  -webkit-transform: rotate(-6deg);/* Safari */
+  -moz-transform: rotate(-6deg);/* Firefox */
+  -ms-transform: rotate(-6deg);/* IE */
+  -o-transform: rotate(-6deg);/* Opera */
+  -webkit-animation-timing-function: ease-in-out;
+              animation-timing-function: ease-in-out;
+  }
+80%{
+  -webkit-transform: rotate(6deg);/* Safari */
+  -moz-transform: rotate(6deg);/* Firefox */
+  -ms-transform: rotate(6deg);/* IE */
+  -o-transform: rotate(6deg);/* Opera */
+  -webkit-animation-timing-function: ease-in-out;
+              animation-timing-function: ease-in-out;
+  }
+85%{
+  -webkit-transform: rotate(-6deg);/* Safari */
+  -moz-transform: rotate(-6deg);/* Firefox */
+  -ms-transform: rotate(-6deg);/* IE */
+  -o-transform: rotate(-6deg);/* Opera */
+  -webkit-animation-timing-function: ease-in-out;
+              animation-timing-function: ease-in-out;
+  }
+90%{
+  -webkit-transform: rotate(6deg);/* Safari */
+  -moz-transform: rotate(6deg);/* Firefox */
+  -ms-transform: rotate(6deg);/* IE */
+  -o-transform: rotate(6deg);/* Opera */
+  width: 95%;
+  font-size: 19px;
+  -webkit-animation-timing-function: ease-in-out;
+              animation-timing-function: ease-in-out;
+  }
+100%{
+  -webkit-transform: rotate(0deg);
+  width: 80%;
+  font-size: 16px;
+  }
+
+
+ 

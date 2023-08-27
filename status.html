@@ -1,0 +1,173 @@
+<html>
+
+<head>
+    <title id="title"></title>
+    $(if refresh-timeout)
+    <!-- meta http-equiv="refresh" content="$(refresh-timeout-secs)" -->
+    $(endif)
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+    <link rel="icon" href="img/favicon.png" />
+    <link rel="stylesheet" href="css/bootstrap.min2.css">
+    <link rel="stylesheet" href="css/theme/dark.css">
+    <link rel="stylesheet" href="css/bg.css">
+    <script src="js/jquery-min.js"></script>
+    <script src="js/bootstrap-min.js"></script>
+    <script defer src="js/vanzj.js"></script>
+    <style>
+        iframe {
+            float: left;
+            height: 22px;
+            width: 100%;
+        }
+    </style>
+    <script language="JavaScript">
+        // < !
+        $(if advert - pending == 'yes')
+            var popup = '';
+        function focusAdvert() {
+            if (window.focus) popup.focus();
+        }
+        function openAdvert() {
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+        function openLogout() {
+            deleteAllCookies();
+            if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+
+
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        }
+        //-->
+    </script>
+</head>
+
+<body $(if advert-pending=='yes' ) onLoad="openAdvert()" $(endif)>
+
+    <div class="main">
+        $(if login-by == 'trial')
+        <i style="visibility: hidden;">Trial User</i><br>
+        $(elif login-by != 'mac')
+        <i id="user" style="visibility: hidden;">$(username)</i><br>
+        $(endif)
+
+        <div class="container" style="background-color: transparent;">
+
+
+            <div style="margin-top:20px; text-align: center; color:#0de30d;"><i style="font-size:60px;"
+                    class="icon user">&#xe801;</i> </div>
+            $(if login-by == 'trial')
+            <small style="font-weight:bold;font-family: serif;font-size:16px;">User: $(username)</small>
+            $(elif login-by != 'mac')
+            <small style="font-weight:bold;font-family: serif;font-size:16px;">User: $(username)</small>
+            $(endif)
+            <br><br>
+            $(if session-time-left)
+            <small style="text-transform:uppercase;font-family: serif;font-weight:bold;font-size:16px;"><i
+                    class="icon clock">&#xe80f;</i> Remaining Time <i class="icon clock">&#xe80f;</i>
+            </small>
+            <div style="margin-bottom:5px"></div>
+
+
+            <div id="timeleft"></div>
+
+
+            $(endif)
+            <br>
+            Your package will expire after this time.
+
+            <br><br>
+            <div class="prettyline"></div>
+
+            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+
+                $(if login-by-mac != 'yes')
+
+
+                Jihad Wi-Fi
+
+                $(endif)
+
+
+                <br><br>
+                <div class="prettyline"></div>
+            </form>
+
+            <br>
+            <div class="col-14" style="color:white">
+                01646-348232
+            </div>
+
+
+
+
+
+            <script>
+                var seconds = '$(session-time-left-secs)';
+                var utime = '$(uptime-secs)';
+                var countDownDate = new Date(Date.now() + seconds * 1000).getTime();
+                var countUptime = new Date(utime * 1000 - Date.now()).getTime();
+                var x = setInterval(function () {
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    var udistance = countUptime + now;
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    var udays = Math.floor(udistance / (1000 * 60 * 60 * 24));
+                    var uhours = Math.floor((udistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var uminutes = Math.floor((udistance % (1000 * 60 * 60)) / (1000 * 60));
+                    var useconds = Math.floor((udistance % (1000 * 60)) / 1000);
+
+
+                    document.getElementById("timeleft").innerHTML =
+                        "<div class=\"days\"> \
+                        <div  class=\"numbers\">" + days + "</div><div style=\"margin-bottom:5px\"></div>Days</div> \
+                        <div class=\"hours\"> \
+                        <div class=\"numbers\">" + hours + "</div><div style=\"margin-bottom:5px\"></div>Hours</div> \
+                        <div class=\"minutes\"> \
+                        <div class=\"numbers\">" + minutes + "</div><div style=\"margin-bottom:5px\"></div>Mins</div> \
+                        <div class=\"seconds\"> \
+                        <div class=\"numbers\">" + seconds + "</div><div style=\"margin-bottom:5px\"></div>Secs</div> \
+                        </div>";
+
+                    var utime_string = udays ? udays + "d " : "";
+                    utime_string += uhours ? uhours + "h " : "";
+                    utime_string += uminutes ? uminutes + "m " : "";
+                    utime_string += useconds ? useconds + "s " : "";
+                    document.getElementById("newuptime").innerHTML = utime_string;
+
+
+
+
+                    // document.getElementById("timeleft").innerHTML = days + "d " + hours + "h "
+                    //   + minutes + "m " + seconds + "s ";
+
+                    if (distance < 0) {
+                        document.getElementById("timeleft").innerHTML = "<div class=\"secs\"> \
+  <div style=\"background: url(img/bg-tile.png) repeat;\" class=\"num\">Expired!</div></div>";
+                        clearInterval(x);
+
+                    }
+                }, 1000);
+
+
+            </script>
+</body>
+
+</html>

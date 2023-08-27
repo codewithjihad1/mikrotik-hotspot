@@ -1,0 +1,132 @@
+/* http://www.menucool.com */
+
+.statusFont1{
+  color: #fcffff;
+  font-size: 20px;
+  text-align: left;
+  align-items: left;
+  margin-left: 10px;
+  
+}
+.statusFont2{
+  color: #0d8c04;
+  font-size: 20px;
+  /*text-shadow:  0 0 5px #05ffee;*/
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.statusFont3{
+  color: #8c0b04;
+  font-size: 20px;
+  /*text-shadow:  0 0 5px #05ffee;*/
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+
+/*Blinking Effect*/
+.blinking{
+  animation:blinkingText 0.90s infinite;
+  margin-bottom:10px;
+  text-align:center;
+}
+@keyframes blinkingText{
+0%{opacity: 0;}
+50%{opacity: .5;}
+100%{opacity: 1;}
+}
+.blinking1{
+  animation:blink 3s infinite;
+  margin-bottom:10px;
+  text-align:center;
+  
+}
+@keyframes blink{
+0%{opacity: 0;}
+25%{opacity: .5;}
+50%{opacity: .75}
+100%{opacity: 1;}
+}
+.blinking2{
+  animation:blinkingText 0.80s infinite;
+  margin-top:10px;
+  text-align:center;
+}
+@keyframes blinkingText{
+0%{opacity: 0;}
+50%{opacity: .5;}
+100%{opacity: 1;}
+}
+
+
+
+/*Change Color Effect*/
+.changecolor{
+  animation:colorText 0.90s infinite;
+  margin-top: 1px;
+  margin-bottom:1px;
+  text-align:center;
+  font-size: 29px;
+  width: 33px;
+}
+
+@keyframes colorText {
+0%{
+  background: -webkit-linear-gradient(#33FF33, #eafcd2);/* Safari and Chrome */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background: -moz-linear-gradient(#33FF33, #eafcd2);/* Firefox */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background: -ms-linear-gradient(#33FF33, #eafcd2);/* IE */
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background: -o-linear-gradient(#33FF33, #eafcd2);/* Opera */
+  -o-background-clip: text;
+  -o-text-fill-color: transparent;
+  }
+40%{
+  background: -webkit-linear-gradient(#d2e0fc, #135beb);/* Safari and Chrome */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background: -moz-linear-gradient(#d2e0fc, #135beb);/* Firefox */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background: -ms-linear-gradient(#d2e0fc, #135beb);/* IE */
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background: -o-linear-gradient(#d2e0fc, #135beb);/* Opera */
+  -o-background-clip: text;
+  -o-text-fill-color: transparent;
+  }
+50%{
+  background: -webkit-linear-gradient(#f7f48d, #8c8804);/* Safari and Chrome */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background: -moz-linear-gradient(#f7f48d, #8c8804);/* Firefox */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background: -ms-linear-gradient(#f7f48d, #8c8804);/* IE */
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background: -o-linear-gradient(#f7f48d, #8c8804);/* Opera */
+  -o-background-clip: text;
+  -o-text-fill-color: transparent;
+  }
+100%{
+  background: -webkit-linear-gradient(#22032e, #e3b5f5);/* Safari and Chrome */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background: -moz-linear-gradient(#22032e, #e3b5f5);/* Firefox */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background: -ms-linear-gradient(#22032e, #e3b5f5);/* IE */
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background: -o-linear-gradient(#22032e, #e3b5f5);/* Opera */
+  -o-background-clip: text;
+  -o-text-fill-color: transparent;
+  }
+
+

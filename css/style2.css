@@ -1,0 +1,267 @@
+/**
+ * 1.0 Reset
+ *
+ * Resetting and rebuilding styles have been helped along thanks to the fine
+ * work of Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+ * along with Nicolas Gallagher and Jonathan Neal
+ * http://necolas.github.com/normalize.css/ and Blueprint
+ * http://www.blueprintcss.org/
+ **/
+
+.information {
+	color:#aaa;
+}
+      table{
+      	border-collapse: collapse;
+      	color:#5E5B5C;
+      }
+ 
+      thead th{
+      	text-align: left;
+      	padding: 10px;
+      }
+ 
+      tbody td{
+      	border-top: 1px solid #e3e3e3;
+      	padding: 10px;
+      }
+ 
+      tbody tr:nth-child(even){
+      	background: rgba(0,0,0,0.10);
+      }
+ 
+textarea {
+	overflow: auto;
+	vertical-align: top;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+
+
+	margin-bottom: 5px;
+	margin-top: 1px;
+	width: 100%;
+	color:#ccc;
+	font-size:13px;
+
+}
+caption, th, td {
+	font-weight: normal;
+	text-align: left;
+}
+th {
+	border-width: 0 0px 0px 0;
+	font-weight: bold;
+
+}
+td {
+	border: none;
+	background: rgba(0,0,0,0.15);
+	width:85px;
+	padding:5px;
+}
+
+/* HEADER */
+.site-header {
+}
+.site-header h1 {
+	color: #767676;
+	margin: 0;
+	font-size: 28px;
+	text-align: center;
+	text-shadow: #dcdcdc 0px 1px 0px;
+}
+.site-header h2 {
+	color: #767676;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 400;
+	font-style: italic;
+	text-align: center;
+	text-shadow: #dcdcdc 0px 1px 0px;
+}
+.main-menu {
+	box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2), inset 1px 0 0 #333, inset -1px 1px 0 #333;
+	#background-color:#63b8ee;
+
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	display:inline-block;
+	margin-top: 15px;
+	text-align: center;
+	font-weight:bold;
+	padding-top:2%;
+	padding-bottom:2%;
+	width:100%;
+	text-shadow:0 1px 0 #ccc;
+	  background: rgb(193, 192, 192);
+  background: rgba(119, 119, 119, 0.34);
+	
+}
+.main-menu a {
+	margin-right: 10px;
+	color:black;
+}
+.main-menu a:hover {
+	text-decoration: none;
+	color:white;
+	text-shadow:none;
+	    transition: all 0.3s;
+}
+
+.info-text {
+	position: fixed;
+	background: #353535;
+	color: #fff;
+	bottom: 0;
+	padding: 0 0 4px;
+	letter-spacing: 1.5px;
+}
+.info-text a,
+.info-text a:hover {
+	color: black;
+	text-decoration: underline;
+}
+
+
+/* CONTENT - DALAMNYA PERSEGI PUTIH*/
+.site-content {
+
+	margin: 0 0 15px;
+	padding: 15px;
+	box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2), inset 1px -1px 0 #333, inset -1px 1px 0 #333;
+
+	-webkit-border-bottom-left-radius:15px;
+	-moz-border-radius-bottomleft:15px;
+	border-bottom-left-radius:15px;
+  background: rgb(193, 192, 192);
+  background: rgba(119, 119, 119, 0.34);
+}
+.site-content .error {
+	color: #FF0000;
+	font-size: 12px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.entry-content h1:first-child,
+.entry-content h2:first-child,
+.entry-content h3:first-child,
+.entry-content h4:first-child,
+.entry-content h5:first-child,
+.entry-content h6:first-child,
+.page-title h1:first-child {
+	margin-top: 0;
+}
+.page-title h1 {
+	margin: 0 0 15px;
+	padding: 0;
+	line-height: 1;
+}
+.entry-content p:last-child,
+.entry-content ul:last-child,
+.entry-content table:last-child {
+	margin-bottom: 0;
+}
+.entry-content img {
+	#width: 96.5%;
+}
+
+
+/* PAGE */
+.page-login table,
+.page-login td,
+.page-contact table,
+.page-contact td {
+	border: 0;
+}
+
+.page-status table {
+	line-height: 2;
+}
+.page-status td {
+	padding-left: 10px;
+}
+.page-logout table {
+	line-height: 2;
+}
+.page-logout td {
+	padding-left: 10px;
+}
+/* RUNNING TEXT DI SINI */
+.news-text {
+	border-top:1px solid #dedede;
+
+	#color: #41a62a;
+	margin: 10px 1px 1px;
+	padding-bottom: 1px;
+	border-radius: 2px;
+	border: 1px solid #4e3043; /* Fallback */
+    border: 1px solid rgba(78,48,67, 0.8);
+    background: rgba(0,0,0,0.25);
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: orange;
+	font-weight:normal;
+    font-size: 14px;
+	text-align:center;
+	height:20px;
+	font-size:13px;
+}
+
+/* FOOTER */
+.site-footer {
+	text-align: center;
+	text-shadow:0.5px 0.5px 0px #888;
+}
+.site-footer a {
+	color: black;
+	font-size: 12px;
+	font-weight: bold;
+}
+.site-footer a:hover {
+	color: white;
+	    transition: all 0.3s;
+}
+.powered-by {
+	margin-bottom: 10px;
+}
+.powered-by img {
+	margin: 0px 4px 1px;
+}
+
+input::-webkit-input-placeholder{
+	color: #333;
+	text-shadow:0.5px 0.5px 0px #999;
+}
+ 
+/*support mozilla*/
+input:-moz-input-placeholder{
+	color: #333;
+	text-shadow:0.5px 0.5px 0px #999;
+}
+ 
+/*support internet explorer*/
+input:-ms-input-placeholder{
+	color: #333;
+	text-shadow:0.5px 0.5px 0px #999;
+}
+
+@media (max-width: 480px) {
+  .page {
+    max-width: 96%;
+  }
+  .main-menu {
+	font-size:13px;  
+  }
+
+}
