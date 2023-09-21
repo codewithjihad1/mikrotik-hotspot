@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://www.stylinecollection.com/index.php?route=bkash_payment_system -->
+<html dir="ltr" lang="en" style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bkash Payment Method</title>
+    <!--<base href="https://www.stylinecollection.com/">--><base href=".">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <link href="https://cdn2.stylinecollection.com/eyJidWNrZXQiOiJzdHlsaW5lLWltYWdlcy1zdGFnaW5nIiwia2V5IjoiY2F0YWxvZ1wvU3R5bGluZV9TeW1ib2xfUGluay1CRy5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjMyLCJoZWlnaHQiOjMyLCJmaXQiOiJjb250YWluIiwiYmFja2dyb3VuZCI6eyJyIjoyNTUsImciOjI1NSwiYiI6MjU1LCJhbHBoYSI6MX19fX0=" rel="icon">
+        <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://cdn2.stylinecollection.com/eyJidWNrZXQiOiJzdHlsaW5lLWltYWdlcy1zdGFnaW5nIiwia2V5IjoiY2F0YWxvZ1wvU3R5bGluZV9TeW1ib2xfUGluay1CRy5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiaGVpZ2h0IjoyMDAsImZpdCI6ImNvbnRhaW4iLCJiYWNrZ3JvdW5kIjp7InIiOjI1NSwiZyI6MjU1LCJiIjoyNTUsImFscGhhIjoxfX19fQ==">
+  <meta property="og:title" content="Bkash Payment Method">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://gtnet.login/">
+  <meta property="og:site_name" content="">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:title" content="Bkash Payment Method ">
+    
+    <script type="text/javascript" async="" src="./Bkash Payment Method_files/js"></script><script src="./Bkash Payment Method_files/1512138602439593" async=""></script><script async="" src="./Bkash Payment Method_files/fbevents.js.download"></script><script async="" src="./Bkash Payment Method_files/gtm.js.download"></script><script async="" src="./Bkash Payment Method_files/analytics.js.download"></script><script src="./Bkash Payment Method_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Bkash Payment Method_files/jquery.lazy.min.js.download" type="text/javascript"></script>
+    <script>
+      var __SETTINGS = {
+        isMobile: false,
+        menuView: false,
+        lazyLoadImageCallBacks: [],
+                imgLoaderSrc: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+      }
+
+      $(function () {
+        var _temp = $.prototype.owlCarousel;
+        $.prototype.owlCarousel = function (obj) {
+          var startX = 0;
+          var startY = 0;
+          $(this).on('touchstart', function ($e) {
+            var e = $e.originalEvent;
+            var touchObj = e.changedTouches[0];
+            startX = touchObj.clientX;
+            startY = touchObj.clientY;
+          })
+
+          $(this).on('touchmove', function ($e) {
+            var e = $e.originalEvent;
+            var touchObj = e.changedTouches[0];
+
+            var distX = Math.abs(touchObj.clientX - startX) + .01;
+            var distY = Math.abs(touchObj.clientY - startY) + .02;
+
+            if (distY / distX < 1) {
+              e.preventDefault();
+            } else {
+              e.stopPropagation();
+            }
+
+
+          })
+          _temp.call(this, obj);
+        }
+      })
+
+    </script>
+
+        <link href="./Bkash Payment Method_files/css" type="text/css" rel="stylesheet"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/bootstrap.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/_grid.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/font-awesome.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/pe-icon-7-stroke.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/stylesheet.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/custom.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/responsive.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/toastr.min.css" media="screen"><link rel="stylesheet" type="text/css" href="./Bkash Payment Method_files/styles.css" media="screen"><link rel="stylesheet" id="style-customization" type="text/css" href="./Bkash Payment Method_files/zorka_skin1.css" media="screen">
+
+  <div class="kl-main-content">
+
+
+
+
+
+<style>
+  .payment-step-container {
+    padding:15px 25px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .payment-step-container {
+      margin:8px 0px;
+    }
+  }
+
+  .payment-step {
+    height:175px;
+    position:relative;
+    border-radius:20px;
+    border:2px solid #b25552;
+    padding-top:10px;
+  }
+
+  .index {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    display: inline-block;
+    border-radius: 8px;
+    border: 2px solid #b25552;
+    z-index: 3;
+    min-width: 34px;
+    background-color: white;
+    font-weight: normal;
+  }
+</style>
+
+<div style="text-align:center;width:100%;">
+
+  <div style="display:inline-block;min-width:70%;padding:5px 8px">
+    <div style="float:right;">
+      <img src="img/bkash_logo.png" style="float:right;padding-right:10px;max-width:150px;">
+    </div>
+    <div style="float:left;clear:both;text-align:left;">
+      <div style="color:#ff3399;text-decoration:underline;">কিভাবে বিকাশের মাধ্যমে ভাউচার কার্ড কিনবেন!</div>
+      <ul style="padding:15px 0px 15px 45px;list-style-type:disc;">
+        <li>Go to bKash Menu by dialing *247#</li>
+        <li>Choose 'Send Money' option by pressing '1'</li>
+        <li>Enter our Merchant wallet number :01880397090</li>
+        <li>Enter BDT. amount you have to pay : xxxx</li>
+        <li>Enter a reference (Mobile Number) against your payment : xxxx</li>
+        <li>Enter the counter number : 1</li>
+        <li>Now enter your PIN to confirm: xxxx</li>
+        <li>Done! You will get a confirmation SMS</li>
+      </ul>
+    </div>
+    <div style="clear:both;position:relative;">
+      <label style="background-color:#963637;color:white;padding:3px 8px;float:left">How to Make Payment Through bKash <span style="font-weight:bold">:</span> </label>
+      <div class="row" style="padding:0px;clear:both">
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step" style="display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:1.3em">
+            <div class="index">1</div>
+            *247#
+          </div>
+          <div style="padding:5px">
+            Dial *247# on your bKash activated mobile phone
+          </div>
+        </div>
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">2</div>
+            <ul style="text-align:left;display:inline-block;list-style-type:decimal;">
+               <li style="color:red;font-size:1.4em;font-weight:bold">Send Money</li>
+              <li>Buy Airtime</li>
+             <li>Payment</li>
+              <li>Cash Out</li>
+              <li>Remittance</li>
+              <li>My bKash</li>
+              <li>Helpline</li>
+            </ul>
+          <div style="padding:5px;font-weight:bold">
+            Press '1' to select 'Send Money'
+          </div>
+        </div>
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">3</div>
+            <span style="font-weight:bold">Enter Receiver bKash No.</span>
+            <div style="position:absolute;width:100%;bottom:10px">
+              <div style="width:100px;border-radius:5px;border:2px solid #b25552;font-weight:bold;margin:auto">01880397090</div>
+            </div>
+          </div>
+          <div style="padding:5px;font-weight:bold">
+            Enter '01880397090'
+          </div>
+        </div>
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">4</div>
+            <span style="font-weight:bold">Enter Amount:</span>
+            <div style="position:absolute;width:100%;bottom:10px">
+              <div style="width:100px;border-radius:5px;border:2px solid #b25552;font-weight:bold;margin:auto">xxxx</div>
+            </div>
+          </div>
+          <div style="padding:5px;font-weight:bold">
+            Enter 'Amount'
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="padding:0px;clear:both">
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">5</div>
+            <span style="font-weight:bold">Enter Reference:</span>
+            <div style="position:absolute;width:100%;bottom:10px">
+              <div style="width:100px;border-radius:5px;border:2px solid #b25552;font-weight:bold;margin:auto">xxxx</div>
+            </div>
+          </div>
+          <div style="padding:5px;font-weight:bold">
+            Enter your Mobile Numbe 'xxxx'
+          </div>
+        </div>
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">6</div>
+            <span style="font-weight:bold">Enter Counter No:</span>
+            <div style="position:absolute;width:100%;bottom:10px">
+              <div style="width:100px;border-radius:5px;border:2px solid #b25552;font-weight:bold;margin:auto">1</div>
+            </div>
+          </div>
+          <div style="padding:5px;font-weight:bold">
+            Press '1' to proceed
+          </div>
+        </div>
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">7</div>
+            Payment
+            <ul>
+              <li>To: 01880397090</li>
+              <li>Amount: TK xxxx</li>
+              <li>Reference: xxxx</li>
+              <li>Counter: 1</li>
+            </ul>
+            Enter PIN to confirm:
+            <div style="position:absolute;width:100%;bottom:10px">
+              <div style="width:100px;border-radius:5px;border:2px solid #b25552;font-weight:bold;margin:auto">xxxx</div>
+            </div>
+          </div>
+          <div style="padding:5px;font-weight:bold">
+            Enter your bKash Menu PIN to confirm payment
+          </div>
+        </div>
+        <div class="col-sm-3 payment-step-container">
+          <div class="payment-step">
+            <div class="index">8</div>
+            <label style="font-weight:bold">bKash</label>
+            <ul style="text-align:left;padding:5px 10px;">
+              <li>Send Money TK.xxxx to 01880397090 successful.</li>
+              <li>Ref xxxx.Counter.1</li>
+              <li>Fee TK. 0.00</li>
+              <li>Balance TK.XXXX.XX</li>
+              <li>TrxID XXXXXXX at 6/09/2020 14:35</li>
+            </ul>
+          </div>
+          <div style="padding:5px;font-weight:bold">
+            পেমেন্ট কনফার্ম হওয়ার সাথে সাথে আপনার ফোনে ভাউচার কোড পেয়ে যাবেন।
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="/"> <b> হোম পেইজে ফিরে যান</b></a>
+  </div>
+
+</div>
+
+
+
+
+
+</body></html>
