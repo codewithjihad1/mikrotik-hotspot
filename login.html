@@ -149,7 +149,7 @@
 
             <!-- Contact Info -->
             <div class="contact">
-                <h3>Contact</h3>
+                <h3>Contact us</h3>
                 <div class="contact-num">
                     <p>
                         <a href="wa.me/+8801646348232" target="_blank"
@@ -243,7 +243,7 @@
 
             <!-- Contact Info -->
             <div class="contact">
-                <h3>Contact</h3>
+                <h3>Contact us</h3>
                 <div class="contact-num">
                     <p>
                         <a href="wa.me/+8801646348232" target="_blank"
@@ -260,7 +260,8 @@
 
             <!-- Copyright info -->
             <div class="dev-info">
-                &copy; 2023 <a href="https://github.com/codewithjihad1">CodeWithJihad</a>. All right reserved.
+                &copy; <span id="cp-year"></span> <a href="https://codewithjihad.me">CodeWithJihad</a>. All right
+                reserved.
             </div>
         </div>
         <br />
@@ -492,6 +493,10 @@
                 memberBtn.classList = 'small-button active';
                 voucherBtn.classList = 'small-button';
             }
+
+            // copywrite date text
+            let date = new Date();
+            document.getElementById('cp-year').innerText = date.getFullYear();
         </script>
     </body>
 </html>
