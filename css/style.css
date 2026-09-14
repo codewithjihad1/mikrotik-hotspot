@@ -290,3 +290,96 @@ iframe  {
   .main{
     margin-top: 2%;
 }}
+
+/* ============ Random / Private MAC warning page ============ */
+#macwarn {
+  display: none;
+}
+html.random-mac #macwarn {
+  display: block;
+}
+html.random-mac #main {
+  display: none;
+}
+
+.warn-icon {
+  font-size: 46px;
+  line-height: 1;
+  color: #e6a700;
+  margin: 5px 0 2px;
+}
+
+#macwarn .heading h2 {
+  font-size: 21px;
+  color: #b45309;
+  font-family: inherit;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+.warn-notice {
+  text-align: left;
+  line-height: 1.6;
+  background-color: #fff3cd;
+  border-left: 4px solid #e6a700;
+}
+.warn-notice small {
+  color: #5c5c5c;
+}
+
+.mac-box {
+  background: #e4dfdf;
+  border-radius: 7px;
+  padding: 8px 5px;
+  margin-bottom: 10px;
+}
+.mac-box span {
+  display: block;
+  font-size: 12px;
+  color: #6b6b6b;
+}
+.mac-box b {
+  font-family: monospace;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #201e1e;
+}
+
+.guide-tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 2%;
+}
+.guide-tabs .small-button {
+  width: 32%;
+  font-size: 13px;
+}
+
+.guide {
+  display: none;
+  text-align: left;
+  background: #fff;
+  border-radius: 7px;
+  padding: 12px 12px 12px 5px;
+  margin-bottom: 10px;
+}
+.guide ol {
+  margin: 0;
+  padding-left: 25px;
+}
+.guide ol li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: #333;
+}
+.guide ol li b {
+  color: #0979f0;
+}
+.guide .guide-note {
+  margin: 8px 0 0 20px;
+  padding-top: 8px;
+  border-top: 1px dashed #d2d2d2;
+  font-size: 12px;
+  color: #6b6b6b;
+  line-height: 1.5;
+}
