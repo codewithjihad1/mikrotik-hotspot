@@ -446,3 +446,35 @@ html.random-mac #main {
   border-radius: 4px;
   background: #0979f0;
 }
+
+/* ============ Status / logout detail table ============ */
+.table2 {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.table2 td {
+  padding: 8px 6px;
+  color: #201e1e;
+  border-bottom: 1px solid #ece7e7;
+}
+
+/* values (MAC, IP, dates) should stay on one line */
+.table2 td:last-child {
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.table2 td:first-child {
+  color: #6b6b6b;
+  white-space: nowrap;
+}
+
+.table2 tr:last-child td {
+  border-bottom: none;
+}

@@ -6,29 +6,31 @@
     $(if refresh-timeout)
     <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
     $(endif)
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="theme-color" content="#3B5998" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
-    <script language="JavaScript">
-
-        $(if advert-pending == 'yes')
-            var popup = '';
+    <script type="text/javascript">
+        // The hotspot "if / endif" directives below are resolved by RouterOS
+        // before the page is sent. They sit inside // comments so that code
+        // editors can still parse this block as valid JavaScript.
+        // $(if advert-pending == 'yes')
+        var popup = '';
         function focusAdvert() {
             if (window.focus) popup.focus();
         }
         function openAdvert() {
             popup = open('$(link-advert)', 'hotspot_advert', '');
-            setTimeout("focusAdvert()", 1000);
+            setTimeout(focusAdvert, 1000);
         }
-        $(endif)
+        // $(endif)
         function openLogout() {
             if (window.name != 'hotspot_status') return true;
             open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
             window.close();
             return false;
         }
-
     </script>
 </head>
 
@@ -90,29 +92,34 @@
             </tr>
             $(elif refresh-timeout)
             <tr>
-                <td align="right">Refresh <i <i class="icon icon-arrows-cw">&#xe800;</i> </td>
+                <td align="right">Refresh <i class="icon icon-arrows-cw">&#xe800;</i> </td>
                 <td>$(refresh-timeout)</td>
             </tr>
             $(endif)
             <tr>
-                <td align="right">Expired <i <i class="icon icon-calendar">&#xe806;</i> </td>
+                <td align="right">Expired <i class="icon icon-calendar">&#xe806;</i> </td>
                 <td id="exp" style="padding-top:0px; padding-left:2px;"></td>
             </tr>
 
         </table>
-        $(if login-by-mac != 'yes')
+        $(if login-by != 'mac')
         <br>
-        <button class="button2" type="button"><i class="icon icon-logout">&#xe804;</i> Logout</button>
+        <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+            <button class="button2" type="submit"><i class="icon icon-logout">&#xe804;</i> Logout</button>
+        </form>
         $(endif)
 
     </div>
     <script type="text/javascript">
         document.getElementById('title').innerHTML = window.location.hostname + " > status";
-        //get vaidity
-        var seconds = '$(session-time-left-secs)';
-        var newDate = new Date(Date.now() + seconds * 1000);
-        var expire_date = newDate.toDateString();
-        document.getElementById("exp").innerHTML = expire_date;
+        // get validity - empty/zero means the account has no time limit
+        var seconds = parseInt('$(session-time-left-secs)', 10);
+        var expEl = document.getElementById("exp");
+        if (isNaN(seconds) || seconds <= 0) {
+            expEl.innerHTML = "Unlimited";
+        } else {
+            expEl.innerHTML = new Date(Date.now() + seconds * 1000).toDateString();
+        }
     </script>
 </body>
 
