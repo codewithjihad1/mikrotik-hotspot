@@ -383,3 +383,66 @@ html.random-mac #main {
   color: #6b6b6b;
   line-height: 1.5;
 }
+
+/* ==================== Infinite image slider ==================== */
+.slider {
+  position: relative;
+  margin: 10px 7px 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.slider-viewport {
+  position: relative;
+  width: 100%;
+  padding-top: 48.39%; /* 310 x 150 banner ratio */
+  overflow: hidden;
+  border-radius: 7px;
+  background: #e4dfdf;
+}
+
+.slider-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  will-change: transform;
+}
+
+.slider-slide {
+  height: 100%;
+  flex: 0 0 auto;
+}
+
+.slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.slider-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b9b4b4;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.slider-dot.active {
+  width: 18px;
+  border-radius: 4px;
+  background: #0979f0;
+}
