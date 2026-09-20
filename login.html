@@ -8,7 +8,30 @@
         <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="./css/style.css" />
 
-        <script type="text/javascript" src="./js/mac-detection.js"></script>
+        <script type="text/javascript">
+            // MikroTik substitutes this template variable before sending login.html.
+            // Keep it quoted: a MAC address contains colons and is not a JavaScript literal.
+            var CLIENT_MAC = "$(mac)";
+            // // var CLIENT_MAC = 'aa:06:81:83:d6:35';
+
+            function isRandomMac(mac) {
+                if (!mac) return false;
+                var hex = String(mac).replace(/[^0-9a-fA-F]/g, "");
+                if (hex.length < 12) return false;
+                var first = parseInt(hex.substr(0, 2), 16);
+                if (isNaN(first)) return false;
+                if (first & 0x01) return false; // multicast - not a real client MAC
+                return (first & 0x02) === 0x02; // locally administered = randomized
+            }
+
+            /* Applied on <html> before paint so the login form never flashes */
+            if (
+                isRandomMac(CLIENT_MAC) &&
+                document.cookie.indexOf("skipmac=1") === -1
+            ) {
+                document.documentElement.className += " random-mac";
+            }
+        </script>
     </head>
 
     <body>
@@ -25,7 +48,9 @@
             function doLogin() {
                 document.sendin.username.value = document.login.username.value;
                 document.sendin.password.value = hexMD5(
-                    '$(chap-id)' + document.login.password.value + '$(chap-challenge)',
+                    "$(chap-id)" +
+                        document.login.password.value +
+                        "$(chap-challenge)",
                 );
                 document.sendin.submit();
                 return false;
@@ -49,11 +74,13 @@
                 </div>
 
                 <div class="notice warn-notice">
-                    আপনার ফোনে <b>Random / Private MAC address</b> চালু আছে, তাই ইন্টারনেট সংযোগ দেওয়া যাচ্ছে না। নিচের
-                    নিয়ম অনুসরণ করে এটি <b>অফ (Device MAC)</b> করুন। <br /><br />
+                    আপনার ফোনে <b>Random / Private MAC address</b> চালু আছে, তাই
+                    ইন্টারনেট সংযোগ দেওয়া যাচ্ছে না। নিচের নিয়ম অনুসরণ করে এটি
+                    <b>অফ (Device MAC)</b> করুন। <br /><br />
                     <small
-                        >Your device is connected with a randomized (private) Wi&#8209;Fi address. Please switch it to
-                        your real device MAC to log in.</small
+                        >Your device is connected with a randomized (private)
+                        Wi&#8209;Fi address. Please switch it to your real
+                        device MAC to log in.</small
                     >
                 </div>
 
@@ -64,11 +91,28 @@
 
                 <!-- Guide tabs -->
                 <div class="box guide-tabs">
-                    <button type="button" id="tab-android" class="small-button" onclick="showGuide('android')">
+                    <button
+                        type="button"
+                        id="tab-android"
+                        class="small-button"
+                        onclick="showGuide('android')"
+                    >
                         Android
                     </button>
-                    <button type="button" id="tab-ios" class="small-button" onclick="showGuide('ios')">iPhone</button>
-                    <button type="button" id="tab-windows" class="small-button" onclick="showGuide('windows')">
+                    <button
+                        type="button"
+                        id="tab-ios"
+                        class="small-button"
+                        onclick="showGuide('ios')"
+                    >
+                        iPhone
+                    </button>
+                    <button
+                        type="button"
+                        id="tab-windows"
+                        class="small-button"
+                        onclick="showGuide('windows')"
+                    >
                         Windows
                     </button>
                 </div>
@@ -76,15 +120,28 @@
                 <!-- Android -->
                 <div class="guide" id="guide-android">
                     <ol>
-                        <li>Settings &rarr; <b>Network &amp; internet</b> &rarr; <b>Wi&#8209;Fi</b></li>
-                        <li>যে Wi‑Fi এ কানেক্ট আছেন তার পাশের <b>&#9881; (gear)</b> আইকনে চাপ দিন</li>
-                        <li><b>Privacy</b> / <b>MAC address type</b> অপশনে চাপ দিন</li>
-                        <li>সিলেক্ট করুন &rarr; <b>Use device MAC</b> (Phone MAC)</li>
+                        <li>
+                            Settings &rarr; <b>Network &amp; internet</b> &rarr;
+                            <b>Wi&#8209;Fi</b>
+                        </li>
+                        <li>
+                            যে Wi‑Fi এ কানেক্ট আছেন তার পাশের
+                            <b>&#9881; (gear)</b> আইকনে চাপ দিন
+                        </li>
+                        <li>
+                            <b>Privacy</b> / <b>MAC address type</b> অপশনে চাপ
+                            দিন
+                        </li>
+                        <li>
+                            সিলেক্ট করুন &rarr; <b>Use device MAC</b> (Phone
+                            MAC)
+                        </li>
                         <li>Wi‑Fi বন্ধ করে আবার কানেক্ট করুন</li>
                     </ol>
                     <p class="guide-note">
-                        Samsung: Settings &rarr; Connections &rarr; Wi&#8209;Fi &rarr; &#9881; &rarr; View more &rarr;
-                        MAC address type &rarr; Phone MAC
+                        Samsung: Settings &rarr; Connections &rarr; Wi&#8209;Fi
+                        &rarr; &#9881; &rarr; View more &rarr; MAC address type
+                        &rarr; Phone MAC
                     </p>
                 </div>
 
@@ -92,13 +149,20 @@
                 <div class="guide" id="guide-ios">
                     <ol>
                         <li>Settings &rarr; <b>Wi&#8209;Fi</b></li>
-                        <li>কানেক্ট করা Wi‑Fi নামের পাশে <b>&#9432; (i)</b> আইকনে চাপ দিন</li>
                         <li>
-                            <b>Private Wi&#8209;Fi Address</b> অপশনটি <b>OFF</b> করুন <br /><small
-                                >(iOS&nbsp;18+ এ: Private Wi&#8209;Fi Address &rarr; <b>Off</b>)</small
+                            কানেক্ট করা Wi‑Fi নামের পাশে
+                            <b>&#9432; (i)</b> আইকনে চাপ দিন
+                        </li>
+                        <li>
+                            <b>Private Wi&#8209;Fi Address</b> অপশনটি
+                            <b>OFF</b> করুন <br /><small
+                                >(iOS&nbsp;18+ এ: Private Wi&#8209;Fi Address
+                                &rarr; <b>Off</b>)</small
                             >
                         </li>
-                        <li><b>Rejoin</b> তে চাপ দিন / Wi‑Fi আবার কানেক্ট করুন</li>
+                        <li>
+                            <b>Rejoin</b> তে চাপ দিন / Wi‑Fi আবার কানেক্ট করুন
+                        </li>
                     </ol>
                     <p class="guide-note">এরপর এই পেজটি Refresh করুন।</p>
                 </div>
@@ -106,23 +170,41 @@
                 <!-- Windows -->
                 <div class="guide" id="guide-windows">
                     <ol>
-                        <li>Settings &rarr; <b>Network &amp; Internet</b> &rarr; <b>Wi&#8209;Fi</b></li>
-                        <li><b>Random hardware addresses</b> অপশনটি <b>Off</b> করুন</li>
-                        <li>কানেক্ট করা নেটওয়ার্কে ক্লিক করে সেখানেও <b>Random hardware addresses: Off</b> করুন</li>
-                        <li>Wi‑Fi <b>Disconnect</b> করে আবার <b>Connect</b> করুন</li>
+                        <li>
+                            Settings &rarr; <b>Network &amp; Internet</b> &rarr;
+                            <b>Wi&#8209;Fi</b>
+                        </li>
+                        <li>
+                            <b>Random hardware addresses</b> অপশনটি
+                            <b>Off</b> করুন
+                        </li>
+                        <li>
+                            কানেক্ট করা নেটওয়ার্কে ক্লিক করে সেখানেও
+                            <b>Random hardware addresses: Off</b> করুন
+                        </li>
+                        <li>
+                            Wi‑Fi <b>Disconnect</b> করে আবার <b>Connect</b> করুন
+                        </li>
                     </ol>
                     <p class="guide-note">
-                        Windows&nbsp;10: Settings &rarr; Network &amp; Internet &rarr; Wi&#8209;Fi &rarr; Manage known
-                        networks
+                        Windows&nbsp;10: Settings &rarr; Network &amp; Internet
+                        &rarr; Wi&#8209;Fi &rarr; Manage known networks
                     </p>
                 </div>
 
-                <button class="button" type="button" onclick="window.location.reload(true)">
-                    <i class="icon icon-arrows-cw">&#xe800;</i> ঠিক করেছি, আবার চেষ্টা করুন
+                <button
+                    class="button"
+                    type="button"
+                    onclick="window.location.reload(true)"
+                >
+                    <i class="icon icon-arrows-cw">&#xe800;</i> ঠিক করেছি, আবার
+                    চেষ্টা করুন
                 </button>
 
                 <div class="trail">
-                    <a href="#" id="skipmac">তারপরও লগইন করব (Continue anyway)</a>
+                    <a href="#" id="skipmac"
+                        >তারপরও লগইন করব (Continue anyway)</a
+                    >
                 </div>
             </div>
             <!-- =================== End random MAC warning =================== -->
@@ -138,16 +220,24 @@
                 <div class="slider" id="slider">
                     <div class="slider-viewport">
                         <div class="slider-track" id="sliderTrack">
-                            <div class="slider-slide"><img src="./img/slider/1.webp" alt="banner" /></div>
-                            <div class="slider-slide"><img src="./img/slider/2.webp" alt="banner" /></div>
-                            <div class="slider-slide"><img src="./img/slider/30.webp" alt="banner" /></div>
+                            <div class="slider-slide">
+                                <img src="./img/slider/1.webp" alt="banner" />
+                            </div>
+                            <div class="slider-slide">
+                                <img src="./img/slider/2.webp" alt="banner" />
+                            </div>
+                            <div class="slider-slide">
+                                <img src="./img/slider/30.webp" alt="banner" />
+                            </div>
                         </div>
                     </div>
                     <div class="slider-dots" id="sliderDots"></div>
                 </div>
                 <!--Slider End-->
 
-                <div class="box" id="infologin">ভাউচার কোড লিখুন তারপর লগইন করুন.</div>
+                <div class="box" id="infologin">
+                    ভাউচার কোড লিখুন তারপর লগইন করুন.
+                </div>
 
                 <!-- prettier-ignore -->
                 <form autocomplete="off" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
@@ -164,17 +254,30 @@
                 $(endif) $(if trial == 'yes')
                 <div class="trail">
                     ৫ মিনিট ফ্রি চালাতে এখানে
-                    <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">ক্লিক করুন</a>
+                    <a
+                        href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)"
+                        >ক্লিক করুন</a
+                    >
                 </div>
                 $(endif)
 
                 <!-- Login Methods -->
                 <div class="box">
-                    <button type="button" id="btnvrc" class="small-button active" onclick="voucher()">
+                    <button
+                        type="button"
+                        id="btnvrc"
+                        class="small-button active"
+                        onclick="voucher()"
+                    >
                         <i class="icon icon-ticket">&#xe802;</i>
                         Voucher
                     </button>
-                    <button type="button" id="btnmem" class="small-button" onclick="member()">
+                    <button
+                        type="button"
+                        id="btnmem"
+                        class="small-button"
+                        onclick="member()"
+                    >
                         <i class="icon icon-user-circle-o">&#xf2be;</i>
                         Member
                     </button>
@@ -183,7 +286,10 @@
                         type="button"
                         id="qr"
                         class="small-button"
-                        onclick="window.location = 'https://laksa19.github.io/myqr'">
+                        onclick="
+                            window.location = 'https://laksa19.github.io/myqr'
+                        "
+                    >
                         <i class="icon icon-qrcode">&#xe801;</i>
                         QR Code
                     </button>
@@ -197,12 +303,22 @@
                 <div class="contact-num">
                     <p>
                         <a href="https://wa.me/8801646348232" target="_blank"
-                            ><img class="icons" src="./img/whatsapp.png" alt="icon" /> 01646-348232</a
+                            ><img
+                                class="icons"
+                                src="./img/whatsapp.png"
+                                alt="icon"
+                            />
+                            01646-348232</a
                         >
                     </p>
                     <p>
                         <a href="tel:01646348232"
-                            ><img class="icons" src="./img/telephone.png" alt="icon" /> 01646-348232</a
+                            ><img
+                                class="icons"
+                                src="./img/telephone.png"
+                                alt="icon"
+                            />
+                            01646-348232</a
                         >
                     </p>
                 </div>
@@ -210,7 +326,8 @@
 
             <!-- Copyright info (shared by both views) -->
             <div class="dev-info">
-                &copy; <span id="cp-year"></span> <a href="https://codewithjihad.me">CodeWithJihad</a>. All right
+                &copy; <span id="cp-year"></span>
+                <a href="https://codewithjihad.me">CodeWithJihad</a>. All right
                 reserved.
             </div>
         </div>
