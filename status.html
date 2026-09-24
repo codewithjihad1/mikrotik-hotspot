@@ -1,126 +1,87 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title id="title"></title>
-    $(if refresh-timeout)
-    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
-    $(endif)
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="theme-color" content="#3B5998" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="text/javascript">
-        // The hotspot "if / endif" directives below are resolved by RouterOS
-        // before the page is sent. They sit inside // comments so that code
-        // editors can still parse this block as valid JavaScript.
-        // $(if advert-pending == 'yes')
-        var popup = '';
-        function focusAdvert() {
-            if (window.focus) popup.focus();
-        }
-        function openAdvert() {
-            popup = open('$(link-advert)', 'hotspot_advert', '');
-            setTimeout(focusAdvert, 1000);
-        }
-        // $(endif)
-        function openLogout() {
-            if (window.name != 'hotspot_status') return true;
-            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
-            window.close();
-            return false;
-        }
-    </script>
-</head>
-
-<body $(if advert-pending=='yes' ) onLoad="openAdvert()" $(endif)>
-    <div class="main">
-
-        $(if login-by == 'trial')
-        <div style="margin-top:20px; text-align: center;">
-            <h3>Welcome</h3><i style="font-size:50px;" class="icon icon-user-circle-o">&#xf2be;</i>
-            <h3>trial user</h3>
-        </div><br>
-        $(elif login-by != 'mac')
-        <div style="margin-top:20px; text-align: center;">
-            <h3>Welcome</h3><i style="font-size:50px;" class="icon icon-user-circle-o">&#xf2be;</i>
-            <h3 id="user">$(username)</h3>
-        </div><br>
+<!doctype html>
+<html lang="en">
+    <head>
+        <title id="title">Connection status</title>
+        $(if refresh-timeout)
+        <meta http-equiv="refresh" content="$(refresh-timeout-secs)" />
         $(endif)
-        <table class="table2">
-            <tr>
-                <td align="right" style="width: 40%;">IP Address <i class="icon icon-sitemap">&#xf0e8;</i> </td>
-                <td>$(ip)</td>
-            </tr>
-            <tr>
-                <td align="right">MAC Address <i class="icon icon-barcode">&#xe80a;</i> </td>
-                <td>$(mac)</td>
-            </tr>
-            <tr>
-                <td align="right">Upload <i class="icon icon-upload">&#xe808;</i> </td>
-                <td>$(bytes-in-nice)</td>
-            </tr>
-            <tr>
-                <td align="right">Download <i class="icon icon-download">&#xe809;</i> </td>
-                <td>$(bytes-out-nice)</td>
-            </tr>
-            <tr>
-                <td align="right">Connected <i class="icon icon-exchange">&#xf0ec;</i> </td>
-                <td>$(uptime)</td>
-            </tr>
-            $(if remain-bytes-total)
-            <tr>
-                <td align="right">Remaining Quota <i class="icon icon-hourglass-2">&#xf252;</i> </td>
-                <td>$(remain-bytes-total-nice)</td>
-            </tr>
-            $(endif)
-            $(if session-time-left)
-            <tr>
-                <td align="right">Remaining time <i class="icon icon-clock">&#xe805;</i> </td>
-                <td>$(session-time-left)</td>
-            </tr>
-            $(endif)
-            $(if blocked == 'yes')
-            <tr>
-                <td align="right">Status <i class="icon icon-check">&#xe807;</i> </td>
-                <td>
-                    <div style="color: #FF8080">
-                        <a href="$(link-advert)" target="hotspot_advert">advertisement</a> required
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="theme-color" content="#155eef" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
+        <link rel="stylesheet" href="./css/style.css" />
+        <script type="text/javascript">
+            // RouterOS resolves the directives below before sending this page.
+            // $(if advert-pending == 'yes')
+            var popup = '';
+            function focusAdvert() { if (window.focus && popup) popup.focus(); }
+            function openAdvert() { popup = open('$(link-advert)', 'hotspot_advert', ''); setTimeout(focusAdvert, 1000); }
+            // $(endif)
+            function openLogout() {
+                if (window.name != 'hotspot_status') return true;
+                open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+                window.close();
+                return false;
+            }
+        </script>
+    </head>
+    <body class="status-page" $(if advert-pending=='yes') onload="openAdvert()" $(endif)>
+        <main class="status-shell">
+            <section class="status-card" aria-labelledby="status-heading">
+                <header class="status-header">
+                    <div class="status-brand"><img src="./img/logo.png" alt="Network logo" /><span>WiFi Portal</span></div>
+                    <div class="connection-badge"><span></span> Connected</div>
+                </header>
+                <div class="status-intro">
+                    <div class="status-orb" aria-hidden="true"><i class="icon icon-check">&#xe807;</i></div>
+                    <p class="eyebrow">YOU ARE ONLINE</p>
+                    $(if login-by == 'trial')
+                    <h1 id="status-heading">Welcome, trial user</h1>
+                    $(elif login-by != 'mac')
+                    <h1 id="status-heading">Welcome, <span id="user">$(username)</span></h1>
+                    $(else)
+                    <h1 id="status-heading">Your WiFi is ready</h1>
+                    $(endif)
+                    <p class="status-subtitle">Your device is securely connected to the internet.</p>
+                </div>
+                <section class="session-panel" aria-labelledby="session-heading">
+                    <div class="section-heading"><div><p class="eyebrow">CURRENT SESSION</p><h2 id="session-heading">Connection overview</h2></div><i class="icon icon-exchange" aria-hidden="true">&#xf0ec;</i></div>
+                    <div class="metric-grid">
+                        <div class="metric"><span class="metric-icon upload"><i class="icon icon-upload">&#xe808;</i></span><div><small>Uploaded</small><strong>$(bytes-in-nice)</strong></div></div>
+                        <div class="metric"><span class="metric-icon download"><i class="icon icon-download">&#xe809;</i></span><div><small>Downloaded</small><strong>$(bytes-out-nice)</strong></div></div>
+                        <div class="metric"><span class="metric-icon time"><i class="icon icon-clock">&#xe805;</i></span><div><small>Connected for</small><strong>$(uptime)</strong></div></div>
+                        $(if session-time-left)
+                        <div class="metric"><span class="metric-icon quota"><i class="icon icon-hourglass-2">&#xf252;</i></span><div><small>Time remaining</small><strong>$(session-time-left)</strong></div></div>
+                        $(endif)
                     </div>
-                </td>
-            </tr>
-            $(elif refresh-timeout)
-            <tr>
-                <td align="right">Refresh <i class="icon icon-arrows-cw">&#xe800;</i> </td>
-                <td>$(refresh-timeout)</td>
-            </tr>
-            $(endif)
-            <tr>
-                <td align="right">Expired <i class="icon icon-calendar">&#xe806;</i> </td>
-                <td id="exp" style="padding-top:0px; padding-left:2px;"></td>
-            </tr>
-
-        </table>
-        $(if login-by != 'mac')
-        <br>
-        <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
-            <button class="button2" type="submit"><i class="icon icon-logout">&#xe804;</i> Logout</button>
-        </form>
-        $(endif)
-
-    </div>
-    <script type="text/javascript">
-        document.getElementById('title').innerHTML = window.location.hostname + " > status";
-        // get validity - empty/zero means the account has no time limit
-        var seconds = parseInt('$(session-time-left-secs)', 10);
-        var expEl = document.getElementById("exp");
-        if (isNaN(seconds) || seconds <= 0) {
-            expEl.innerHTML = "Unlimited";
-        } else {
-            expEl.innerHTML = new Date(Date.now() + seconds * 1000).toDateString();
-        }
-    </script>
-</body>
-
+                    $(if remain-bytes-total)
+                    <div class="quota-strip"><span><i class="icon icon-hourglass-2">&#xf252;</i> Remaining data</span><strong>$(remain-bytes-total-nice)</strong></div>
+                    $(endif)
+                </section>
+                <section class="details-panel" aria-labelledby="details-heading">
+                    <div class="section-heading compact"><div><p class="eyebrow">DEVICE</p><h2 id="details-heading">Connection details</h2></div></div>
+                    <dl class="connection-details">
+                        <div><dt><i class="icon icon-sitemap">&#xf0e8;</i> IP address</dt><dd>$(ip)</dd></div>
+                        <div><dt><i class="icon icon-barcode">&#xe80a;</i> MAC address</dt><dd>$(mac)</dd></div>
+                        <div><dt><i class="icon icon-calendar">&#xe806;</i> Access expires</dt><dd id="exp">Checking…</dd></div>
+                        $(if blocked == 'yes')
+                        <div class="attention"><dt><i class="icon icon-check">&#xe807;</i> Action needed</dt><dd><a href="$(link-advert)" target="hotspot_advert">View advertisement</a></dd></div>
+                        $(elif refresh-timeout)
+                        <div><dt><i class="icon icon-arrows-cw">&#xe800;</i> Refreshes in</dt><dd>$(refresh-timeout)</dd></div>
+                        $(endif)
+                    </dl>
+                </section>
+                $(if login-by != 'mac')
+                <form class="logout-form" action="$(link-logout)" name="logout" onsubmit="return openLogout()"><button class="status-logout" type="submit"><i class="icon icon-logout">&#xe804;</i> Disconnect from WiFi</button></form>
+                $(endif)
+            </section>
+            <p class="status-footnote">Keep this page open to monitor your connection.</p>
+        </main>
+        <script type="text/javascript">
+            document.getElementById('title').textContent = window.location.hostname + ' · Connection status';
+            var seconds = parseInt('$(session-time-left-secs)', 10);
+            var expEl = document.getElementById('exp');
+            expEl.textContent = isNaN(seconds) || seconds <= 0 ? 'Unlimited access' : new Date(Date.now() + seconds * 1000).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        </script>
+    </body>
 </html>
