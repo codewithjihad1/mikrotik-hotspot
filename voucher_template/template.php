@@ -31,35 +31,49 @@ elseif ($plen == 3) { $pf = 15; $pc = 7; }
 else { $pf = 11; $pc = 6; }
 
 /*
-Warna banner harga berdasarkan harga ($getsprice).
-Warna bisa dilihat di https://material.io/guidelines/style/color.html#color-color-palette
-Tambah warna baru: copy satu baris elseif di bawah, lalu paste sebelum "else".
+Warna banner harga berdasarkan DURASI paket ($days), bukan harga.
+Palet warna profesional & mencolok, satu warna khas per paket:
+1 Hari, 3 Hari, 7 Hari, 10 Hari, 15 Hari, 30 Hari.
+Tambah paket baru: copy satu baris elseif di bawah, lalu paste sebelum "else".
 */
-if ($getsprice == "1000") {
-    $color = "#FF1493";
-} elseif ($getsprice == "2000") {
-    $color = "#8B008B";
-} elseif ($getsprice == "3000") {
-    $color = "#666666";
-} elseif ($getsprice == "5000") {
-    $color = "#FF4500";
-} elseif ($getsprice == "10000") {
-    $color = "#E65100";
-} elseif ($getsprice == "15000") {
-    $color = "#228B22";
-} elseif ($getsprice == "20000") {
-    $color = "#008000";
-} elseif ($getsprice == "30000") {
-    $color = "#FF00FF";
-} elseif ($getsprice == "60000") {
-    $color = "#E60C00";
-} elseif ($getsprice == "70000") {
-    $color = "#FF0000";
+if ($days == 1) {
+    $color = "#0EA5E9"; // 1 Hari - Sky Blue
+} elseif ($days == 3) {
+    $color = "#10B981"; // 3 Hari - Emerald Green
+} elseif ($days == 7) {
+    $color = "#0D9488"; // 7 Hari - Deep Teal
+} elseif ($days == 10) {
+    $color = "#8B5CF6"; // 10 Hari - Violet Purple
+} elseif ($days == 15) {
+    $color = "#C026D3"; // 15 Hari - Fuchsia Magenta
+} elseif ($days == 30) {
+    $color = "#7C3AED"; // 30 Hari - Deep Red
 }
-// else color (default ungu sesuai desain)
+// else color (default ungu sesuai desain, untuk durasi di luar daftar)
 else {
     $color = "#7C3AED";
 }
+
+// ---------- Shade helper (untuk gradient footer dinamis berdasarkan $color) ----------
+// Dibungkus function_exists supaya aman saat template ini di-include berkali-kali
+// (satu kali per voucher) oleh Mikhmon — tanpa ini, voucher ke-2 akan fatal error
+// "cannot redeclare function" dan proses render berhenti di voucher pertama.
+if (!function_exists('jw_shade')) {
+    function jw_shade($hex, $percent) {
+        $hex = ltrim($hex, '#');
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+        $r = (int) max(0, min(255, $r + $r * $percent / 100));
+        $g = (int) max(0, min(255, $g + $g * $percent / 100));
+        $b = (int) max(0, min(255, $b + $b * $percent / 100));
+        return sprintf('#%02X%02X%02X', $r, $g, $b);
+    }
+}
+// Tiga stop gradient footer: gelap -> menengah -> mendekati warna asli paket.
+$footerStart = jw_shade($color, -70);
+$footerMid   = jw_shade($color, -45);
+$footerEnd   = jw_shade($color, -15);
 ?>
 <!--mks-mulai-->
 <style>
@@ -122,7 +136,7 @@ else {
         <path d="M8 14h2M12 14h2M8 17.5h2M12 17.5h2" stroke-width="2.4"/>
     </svg>
     <div class="abs nw" style="left:25.5px;top:53px;font-size:4.8px;font-weight:600;line-height:6px;color:#5B6B86;">Duration :</div>
-    <div class="abs nw" style="left:25.5px;top:58.5px;font-size:7.4px;font-weight:800;line-height:9.5px;color:#6D28D9;"><?php echo $dur; ?></div>
+    <div class="abs nw" style="left:25.5px;top:58.5px;font-size:7.4px;font-weight:800;line-height:9.5px;color:<?php echo $color; ?>;"><?php echo $dur; ?></div>
 
     <!-- Pemisah -->
     <div class="abs" style="left:56px;top:53px;width:0.5px;height:11.5px;background:#C9D1DE;"></div>
@@ -137,8 +151,8 @@ else {
     <div class="abs nw" style="left:77px;top:53px;font-size:4.8px;font-weight:600;line-height:6px;color:#5B6B86;">Data :</div>
     <div class="abs nw" style="left:77px;top:58.5px;font-size:7.2px;font-weight:800;line-height:9.5px;color:#0B9A6B;"><?php echo $dataText; ?></div>
 
-    <!-- Pill High Speed (lebar mengikuti teks, tidak akan overflow) -->
-    <div class="abs" style="left:11px;top:70px;height:10px;display:flex;align-items:center;gap:2.5px;padding:0 5px 0 3.5px;border-radius:5px;background:linear-gradient(90deg,#4338CA 0%,#7C3AED 100%);">
+    <!-- Pill High Speed (warna dinamis mengikuti durasi, lebar mengikuti teks) -->
+    <div class="abs" style="left:11px;top:70px;height:10px;display:flex;align-items:center;gap:2.5px;padding:0 5px 0 3.5px;border-radius:5px;background:<?php echo $color; ?>;">
         <svg width="7" height="7" viewBox="0 0 24 24" fill="#fff" style="display:block;flex:none;">
             <path d="M13.5 1 4 14h6.5L9.5 23 20 9.5h-6.8z"/>
         </svg>
@@ -146,7 +160,7 @@ else {
     </div>
 
     <!-- QR code -->
-    <div class="abs" style="left:129px;top:26px;width:42px;height:42px;border:1px solid #6D28D9;border-radius:4.5px;background:#fff;">
+    <div class="abs" style="left:129px;top:26px;width:42px;height:42px;border:1px solid <?php echo $color; ?>;border-radius:4.5px;background:#fff;">
         <div class="abs" style="left:2px;top:2px;"><?= $qrcode ?></div>
     </div>
 
@@ -160,7 +174,7 @@ else {
     <div class="abs nw" style="left:139px;top:74px;font-size:5.4px;font-weight:800;line-height:6.5px;color:#0A1A3F;">jihad.wifi</div>
 
     <!-- Footer -->
-    <div class="abs" style="left:0;bottom:0;width:100%;height:20px;background:linear-gradient(100deg,#0F2557 0%,#14307A 55%,#2A2A9A 100%);"></div>
+    <div class="abs" style="left:0;bottom:0;width:100%;height:20px;background:linear-gradient(100deg,<?php echo $footerStart; ?> 0%,<?php echo $footerMid; ?> 55%,<?php echo $footerEnd; ?> 100%);"></div>
     <div class="abs" style="left:11.5px;bottom:0;height:20px;display:flex;align-items:center;gap:4px;">
         <div style="width:8px;height:8px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;">
             <svg width="4.8" height="4.8" viewBox="0 0 24 24" fill="#0F2557" style="display:block;">
@@ -178,4 +192,4 @@ else {
     </div>
 
 </div>
-<!--mks-akhir-->	        	        	        	        	        	        	        	        	        	        	        	        	        	        
+<!--mks-akhir-->
