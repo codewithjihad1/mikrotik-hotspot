@@ -66,8 +66,16 @@
                 <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Login Again</button>
             </form>
         </div>
+        <script type="text/javascript" src="./js/credentials.js"></script>
         <script type="text/javascript">
             document.getElementById('title').innerHTML = window.location.hostname + ' > logout';
+
+            // Explicit customer logout: erase the saved automatic re-login
+            // credentials (load shedding / router reboots never reach this
+            // page, so recovery data survives those events).
+            if (window.HSReLogin) {
+                try { window.HSReLogin.clearAll(); } catch (e) {}
+            }
         </script>
     </body>
 </html>

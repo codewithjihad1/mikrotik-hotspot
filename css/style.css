@@ -258,6 +258,16 @@ iframe {
     color: #000;
 }
 
+/* Automatic re-login (js/auto-login.js) */
+.notice.autologin-warn {
+    background-color: #fdecea;
+    color: #7f1d1d;
+}
+form.auto-trying {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
 @keyframes fadein {
     from {
         opacity: 0;

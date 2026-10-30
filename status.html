@@ -77,11 +77,23 @@
             </section>
             <p class="status-footnote">Keep this page open to monitor your connection.</p>
         </main>
+        <script type="text/javascript" src="./js/credentials.js"></script>
         <script type="text/javascript">
             document.getElementById('title').textContent = window.location.hostname + ' · Connection status';
             var seconds = parseInt('$(session-time-left-secs)', 10);
             var expEl = document.getElementById('exp');
             expEl.textContent = isNaN(seconds) || seconds <= 0 ? 'Unlimited access' : new Date(Date.now() + seconds * 1000).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+            // ---- Automatic re-login bookkeeping (see js/credentials.js) ----
+            // A status page being served means the login attempt (manual or
+            // automatic) finished; cancel any in-flight attempt marker so a
+            // later MANUAL failure is never mis attributed to auto-recovery.
+            if (window.HSReLogin) {
+                try { window.HSReLogin.consumeAttemptMarker(); } catch (e) {}
+                try {
+                    window.HSReLogin.syncFromStatus('$(username)', seconds, '$(login-by)');
+                } catch (e) {}
+            }
         </script>
     </body>
 </html>

@@ -45,7 +45,20 @@
 
         <script type="text/javascript" src="md5.js"></script>
         <script type="text/javascript">
+            // CHAP parameters resolved by RouterOS; reused by the automatic
+            // re-login module (js/auto-login.js) — same handshake, no change.
+            var HOTSPOT_CHAP = { id: "$(chap-id)", challenge: "$(chap-challenge)" };
+
             function doLogin() {
+                // Stash the pair the customer just used so status.html can
+                // later compute the browser-recovery expiry (see
+                // js/credentials.js). Never sent in URLs, never logged.
+                if (window.HSReLogin) {
+                    window.HSReLogin.savePending(
+                        document.login.username.value,
+                        document.login.password.value,
+                    );
+                }
                 document.sendin.username.value = document.login.username.value;
                 document.sendin.password.value = hexMD5(
                     "$(chap-id)" +
@@ -57,6 +70,21 @@
             }
         </script>
         $(endif)
+
+        <script type="text/javascript">
+            // Non-CHAP (PAP) profiles: stash before the plain POST exactly
+            // like doLogin() does for CHAP. No-op on CHAP profiles because
+            // the form then carries onSubmit="return doLogin()" instead.
+            function papSubmit() {
+                if (window.HSReLogin) {
+                    window.HSReLogin.savePending(
+                        document.login.username.value,
+                        document.login.password.value,
+                    );
+                }
+                return true; // allow the normal form POST
+            }
+        </script>
 
         <div class="main">
             <!-- Header section (shared by both views) -->
@@ -246,7 +274,7 @@
                 </div>
 
                 <!-- prettier-ignore -->
-                <form autocomplete="off" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                <form autocomplete="off" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(else) onSubmit="return papSubmit()" $(endif)>
                     <input type="hidden" name="dst" value="$(link-orig)" />
                     <input type="hidden" name="popup" value="true" />
                     <input class="username" name="username" type="text" placeholder="username" />
@@ -254,6 +282,11 @@
 
                     <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Login</button>
                 </form>
+
+                <!-- Automatic re-login notice (js/auto-login.js).
+                     Hidden by default; shows the "আপনার অ্যাকাউন্ট যাচাই
+                     করা হচ্ছে..." message or an automatic-failure warning. -->
+                <div class="notice" id="autologin-note" style="display: none"></div>
 
                 $(if error)
                 <div class="notice">$(error)</div>
@@ -339,6 +372,8 @@
         </div>
         <br />
 
+        <script type="text/javascript" src="./js/credentials.js"></script>
         <script type="text/javascript" src="./js/login.js"></script>
+        <script type="text/javascript" src="./js/auto-login.js"></script>
     </body>
 </html>
